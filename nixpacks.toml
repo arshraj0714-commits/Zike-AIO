@@ -1,0 +1,40 @@
+phases.setup]
+  aptPkgs = [
+    "ffmpeg",
+    "libffi-dev",
+    "libsndfile1",
+    "fonts-noto-core",
+    "fonts-noto-cjk",
+    "ca-certificates",
+    "curl",
+  ]
+
+# --- 2. Python runtime ----------------------------------------
+[variables]
+  PYTHON_VERSION       = "3.11"
+  PYTHONUNBUFFERED     = "1"
+  PYTHONDONTWRITEBYTECODE = "1"
+  PIP_DISABLE_PIP_VERSION_CHECK = "1"
+  PIP_NO_CACHE_DIR     = "1"
+  API_ENABLED          = "true"
+  # API_PORT is intentionally set from Railway's $PORT at runtime
+  # — see the start phase.
+
+# --- 3. Install phase -----------------------------------------
+[phases.install]
+  cmds = [
+    "python -m venv /opt/venv",
+    "/opt/venv/bin/pip install --upgrade pip setuptools wheel",
+    "/opt/venv/bin/pip install -r bot/requirements.txt",
+  ]
+
+# --- 4. Build phase -------------------------------------------
+#  No compiled assets to produce — skip.
+[phases.build]
+  cmds = ["echo 'No build step required for the Python bot.'"]
+
+# --- 5. Start phase -------------------------------------------
+#  Railway injects $PORT. The FastAPI server (run inside Zike.py
+#  via uvicorn) listens on API_PORT, so we map PORT -> API_PORT.
+[start]
+  cmd = "API_PORT=${PORT:-8000} /opt/venv/bin/python bot/Zike.py"
