@@ -1,40 +1,83 @@
-phases.setup]
-  aptPkgs = [
+# =============================================================
+#  Nixpacks config · Zike Bot + Dashboard (single Railway svc)
+# =============================================================
+#  Builds AND runs BOTH in one service:
+#    • Python 3.11 bot (bot/Zike.py) + embedded FastAPI
+#    • Node 20 Next.js dashboard (dashboard/)
+#  See start.sh for the actual multi-process launch.
+# =============================================================
+
+# --- Runtime variables ----------------------------------------
+[variables]
+  PYTHONUNBUFFERED          = "1"
+  PYTHONDONTWRITEBYTECODE   = "1"
+  PIP_DISABLE_PIP_VERSION_CHECK = "1"
+  PIP_NO_CACHE_DIR          = "1"
+  NPM_CONFIG_LEGACY_PEER_DEPS = "1"
+  NEXT_TELEMETRY_DISABLED   = "1"
+  API_ENABLED               = "true"
+
+# --- 1. System packages (Nix) --------------------------------
+#  python311        → bot runtime
+#  nodejs_20        → dashboard runtime
+#  ffmpeg           → discord voice / wavelink playback
+#  openssl          → next-auth JWT signing
+#  fontconfig + noto-fonts-cjk → PIL image rendering (welcome cards etc.)
+[phases.setup]
+  nixPkgs = [
+    "python311",
+    "python311Packages.pip",
+    "python311Packages.setuptools",
+    "nodejs_20",
     "ffmpeg",
-    "libffi-dev",
-    "libsndfile1",
-    "fonts-noto-core",
-    "fonts-noto-cjk",
-    "ca-certificates",
-    "curl",
+    "openssl",
+    "fontconfig",
+    "noto-fonts-cjk",
   ]
 
-# --- 2. Python runtime ----------------------------------------
-[variables]
-  PYTHON_VERSION       = "3.11"
-  PYTHONUNBUFFERED     = "1"
-  PYTHONDONTWRITEBYTECODE = "1"
-  PIP_DISABLE_PIP_VERSION_CHECK = "1"
-  PIP_NO_CACHE_DIR     = "1"
-  API_ENABLED          = "true"
-  # API_PORT is intentionally set from Railway's $PORT at runtime
-  # — see the start phase.
-
-# --- 3. Install phase -----------------------------------------
+# --- 2. Install deps -----------------------------------------
 [phases.install]
   cmds = [
+    # Python venv + bot deps
     "python -m venv /opt/venv",
     "/opt/venv/bin/pip install --upgrade pip setuptools wheel",
     "/opt/venv/bin/pip install -r bot/requirements.txt",
+    # Dashboard deps (--legacy-peer-deps avoids Radix/React peer conflicts)
+    "cd dashboard && npm install --legacy-peer-deps",
   ]
 
-# --- 4. Build phase -------------------------------------------
-#  No compiled assets to produce — skip.
+# --- 3. Build the dashboard ----------------------------------
 [phases.build]
-  cmds = ["echo 'No build step required for the Python bot.'"]
+  cmds = [
+    "cd dashboard && npm run build",
+  ]
 
-# --- 5. Start phase -------------------------------------------
-#  Railway injects $PORT. The FastAPI server (run inside Zike.py
-#  via uvicorn) listens on API_PORT, so we map PORT -> API_PORT.
+# --- 4. Start both processes ---------------------------------
 [start]
-  cmd = "API_PORT=${PORT:-8000} /opt/venv/bin/python bot/Zike.py"
+  cmd = "bash /app/start.sh"
+
+# =============================================================
+#  Required env vars (Railway → Variables):
+# -------------------------------------------------------------
+#  TOKEN                  → Discord bot token
+#  OWNER_IDS              → comma-separated Discord user IDs
+#  MONGO_URI              → mongodb+srv://... (bot database)
+#  API_KEY                → shared secret the dashboard sends
+#  LOG_CHANNEL_ID         → Discord channel ID for join/leave logs
+#  SERVER_COUNT_CHANNEL_ID
+#  USER_COUNT_CHANNEL_ID
+#
+#  Dashboard / auth:
+#  NEXTAUTH_URL           → https://<your-railway-domain>
+#  NEXTAUTH_SECRET        → openssl rand -base64 32
+#  DISCORD_CLIENT_ID      → Discord OAuth2 client id
+#  DISCORD_CLIENT_SECRET  → Discord OAuth2 client secret
+#  NEXT_PUBLIC_API_URL    → https://<cloudflared-tunnel-url>/api/v1
+#                            (printed by the bot on first boot)
+#  NEXT_PUBLIC_BRAND_NAME → Zike
+#
+#  Optional:
+#  PORT        → injected by Railway (defaults to 3000)
+#  API_PORT    → internal FastAPI port (defaults to 8000)
+#  TUNNEL_ENABLED → "true" to expose the bot API via Cloudflare
+# =============================================================
