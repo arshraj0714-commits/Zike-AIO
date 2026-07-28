@@ -131,10 +131,10 @@ class Giveaway(commands.Cog):
                     winners_count = min(len(users), int(giveaway[4]))
                     winner = ', '.join(f'<@!{i}>' for i in random.sample(users, k=winners_count))
 
-                    desc = f"Ended at <t:{int(current_time)}:R>\nHosted by <@{int(giveaway[3])}>\nWinner(s): {winner}"
+                    desc = f"{TADAA} **GIVEAWAY ENDED** {TADAA}\n\nEnded at <t:{int(current_time)}:R>\nHosted by <@{int(giveaway[3])}>\nWinner(s): {winner}"
                     view = CV2(f"{giveaway[5]}", desc)
 
-                    await message.edit(content=f"{TADAA} **GIVEAWAY ENDED** {TADAA}", view=view)
+                    await message.edit(view=view)
                     await message.reply(f"{TADAA} Congrats {winner}, you won **{giveaway[5]}!**, Hosted by <@{int(giveaway[3])}>")
                     await self.cursor.execute("DELETE FROM Giveaway WHERE message_id = ? AND guild_id = ?", (message.id, message.guild.id))
                     await self.connection.commit()
@@ -205,6 +205,7 @@ class Giveaway(commands.Cog):
         ends = (datetime.datetime.now().timestamp() + converted)
 
         desc = (
+            f"{TADAA} **GIVEAWAY** {TADAA}\n\n"
             f"{ARROWRED} Winner(s): **{winners}**\n"
             f"{ARROWRED} Hosted by {ctx.author.mention}\n"
             f"{ARROWRED} Ends <t:{round(ends)}:R> (<t:{round(ends)}:f>)\n\n"
@@ -213,7 +214,7 @@ class Giveaway(commands.Cog):
         
         view = CV2(f"{TADAA} {prize}", desc)
 
-        message = await ctx.send(f"{TADAA} **GIVEAWAY** {TADAA}", view=view)
+        message = await ctx.send(view=view)
         try:
            await ctx.message.delete()
         except:
@@ -282,10 +283,10 @@ class Giveaway(commands.Cog):
 
             winner = ', '.join(f'<@!{i}>' for i in random.sample(users, k=int(re[4])))
 
-            desc = f"Ended at <t:{int(current_time)}:R>\nHosted by <@{int(re[3])}>\nWinner(s): {winner}"
+            desc = f"🎁 **GIVEAWAY ENDED** 🎁\n\nEnded at <t:{int(current_time)}:R>\nHosted by <@{int(re[3])}>\nWinner(s): {winner}"
             view = CV2(f"🎁 {re[5]}", desc)
 
-            await message.edit(content="🎁 **GIVEAWAY ENDED** 🎁", view=view)
+            await message.edit(view=view)
 
             if int(ctx.channel.id) != int(re[6]):
                 await ctx.send(f"{TADAA} Successfully ended the giveaway in <#{int(re[6])}>")
@@ -315,10 +316,10 @@ class Giveaway(commands.Cog):
 
             winner = ', '.join(f'<@!{i}>' for i in random.sample(users, k=int(re[4])))
 
-            desc = f"Ended <t:{int(current_time)}:R>\nHosted by <@{int(re[3])}>\nWinner(s): {winner}"
+            desc = f"🎁 **GIVEAWAY ENDED** 🎁\n\nEnded <t:{int(current_time)}:R>\nHosted by <@{int(re[3])}>\nWinner(s): {winner}"
             view = CV2(f"🎁 {re[5]}", desc)
 
-            await message.edit(content="🎁 **GIVEAWAY ENDED** 🎁", view=view)
+            await message.edit(view=view)
 
             await message.reply(f"💐 Congrats {winner}, you won **{re[5]}!**, Hosted by <@{int(re[3])}>")
             await self.cursor.execute("DELETE FROM Giveaway WHERE message_id = ? AND guild_id = ?", (message.id, message.guild.id))
