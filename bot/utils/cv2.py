@@ -1,10 +1,6 @@
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║                                                                  ║
-# ║   ░█▀▀░█▀█░█▀▄░█▀▀░█░█   ░█▀▄░█▀▀░█░█░█▀▀                     ║
-# ║   ░█░░░█░█░█░█░█▀▀░▄▀▄   ░█░█░█▀▀░▀▄▀░▀▀█                     ║
-# ║   ░▀▀▀░▀▀▀░▀▀░░▀▀▀░▀░▀   ░▀▀░░▀▀▀░░▀░░▀▀▀                     ║
-# ║                                                                  ║
-# ║            © 2026 Arsh — All Rights Reserved                    ║
+# ║            © 2026 Arsh — All Rights Reserved                     ║
 # ║                                                                  ║
 # ║            Built by  ──  Arsh                                    ║
 # ║                                                                  ║
@@ -18,7 +14,7 @@ added via .add_item().
 """
 
 import discord
-from discord.ui import LayoutView, TextDisplay, Separator, Container, Thumbnail
+from discord.ui import LayoutView, TextDisplay, Separator, Container, Thumbnail, Section
 
 
 def build_container(*items, accent_color=None):
@@ -39,24 +35,28 @@ class CV2(LayoutView):
     """
     def __init__(self, title, *sections, author=None, avatar_url=None, accent=None):
         super().__init__(timeout=None)
-        header_items = []
+        container_items = []
+
+        # Header: if we have an avatar, build a Section with the title text
+        # on the left and the avatar Thumbnail as the accessory on the right.
+        # If no avatar, just a plain TextDisplay.
         if avatar_url:
-            header_items.append(_make_thumbnail(avatar_url, author or title))
-        header_items.append(TextDisplay(f"**{title}**"))
+            container_items.append(
+                Section(
+                    TextDisplay(f"**{title}**"),
+                    accessory=Thumbnail(
+                        media=avatar_url,
+                        description=author or title,
+                    ),
+                )
+            )
+        else:
+            container_items.append(TextDisplay(f"**{title}**"))
+
+        # Body sections
         body_items = [item for s in sections for item in (Separator(visible=True), TextDisplay(str(s)))]
-        container = build_container(*header_items, *body_items, accent_color=accent)
+        container = build_container(*container_items, *body_items, accent_color=accent)
         self.add_item(container)
-
-
-def _make_thumbnail(url, description):
-    """Build a Thumbnail component for a CV2 container."""
-    # discord.ui.Thumbnail expects a `media` PartialEmoji and a `url`.
-    # We use a dummy emoji for media and pass the avatar URL via `url`.
-    return Thumbnail(
-        media=discord.PartialEmoji.from_str("\N{WHITE LARGE SQUARE}"),
-        url=url,
-        description=description,
-    )
 
 def add_action_rows(container, components):
     """Safely adds components to a CV2 container across multiple ActionRows"""
