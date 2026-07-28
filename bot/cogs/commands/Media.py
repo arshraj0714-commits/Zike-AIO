@@ -225,10 +225,11 @@ class Media(commands.Cog):
                         await block_db.commit()
 
                     desc = (
+                        f"{message.author.mention}\n\n"
                         "⚠️ You are blacklisted from using my commands due to spamming in the media channel. "
                         "If you believe this is a mistake, please reach out to the support server with proof."
                     )
-                    await message.channel.send(f"{message.author.mention}", view=CV2("You Have Been Blacklisted", desc))
+                    await message.channel.send(view=CV2("You Have Been Blacklisted", desc))
                     del self.infractions[message.author.id]
 
 async def setup(bot):
