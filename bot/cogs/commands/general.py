@@ -1,10 +1,5 @@
 # ╔══════════════════════════════════════════════════════════════════╗
-# ║                                                                  ║
-# ║   ░█▀▀░█▀█░█▀▄░█▀▀░█░█   ░█▀▄░█▀▀░█░█░█▀▀                     ║
-# ║   ░█░░░█░█░█░█░█▀▀░▄▀▄   ░█░█░█▀▀░▀▄▀░▀▀█                     ║
-# ║   ░▀▀▀░▀▀▀░▀▀░░▀▀▀░▀░▀   ░▀▀░░▀▀▀░░▀░░▀▀▀                     ║
-# ║                                                                  ║
-# ║            © 2026 Arsh — All Rights Reserved                    ║
+# ║            © 2026 Arsh — All Rights Reserved                     ║
 # ║                                                                  ║
 # ║            Built by  ──  Arsh                                    ║
 # ║                                                                  ║
@@ -390,7 +385,7 @@ class General(commands.Cog):
       invite_text = (
           "```Empower your server with blazing-fast features and 24/7 support!```\n"
           f"{ZIKELINKS} **Quick Actions**\n"
-          f">>> **[Invite {BotName}](https://discord.com/oauth2/authorize?client_id=1396114795102470196&permissions=8&integration_type=0&scope=bot+applications.commands)**\n"
+          f">>> **[Invite {BotName}](https://discord.com/oauth2/authorize?client_id=1530915473716150292&permissions=8&integration_type=0&scope=bot+applications.commands)**\n"
           "**[Support Server](https://discord.gg/uBDnveBU3c)**"
       )
       await ctx.send(view=CV2(f"{ZIKECONNECTION} {BotName} Integration Hub!", invite_text))
