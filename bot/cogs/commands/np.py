@@ -278,7 +278,7 @@ class NoPrefix(commands.Cog):
                         support = Button(
                             label="Support",
                             style=discord.ButtonStyle.link,
-                            url=f"https://discord.gg/arsh",
+                            url=f"https://discord.gg/uBDnveBU3c",
                         )
                         view = View()
                         view.add_item(support)
@@ -581,7 +581,7 @@ class NoPrefix(commands.Cog):
 
         embed = CV2Embed(
             title="Congratulations you got 2 months No Prefix!",
-            description=f"You've been credited 2 months of global No Prefix for boosting our Partnered Servers. You can now use my commands without prefix. If you wish to remove it, please reach out [Support Server](https://discord.gg/arsh).",
+            description=f"You've been credited 2 months of global No Prefix for boosting our Partnered Servers. You can now use my commands without prefix. If you wish to remove it, please reach out [Support Server](https://discord.gg/uBDnveBU3c).",
             color=0xFF0000,
         )
         try:
@@ -613,7 +613,7 @@ class NoPrefix(commands.Cog):
 
         embed = CV2Embed(
             title=f"{ICONS_WARNING} Global No Prefix Expired",
-            description=f"Hey {user.mention}, your global no prefix has expired!\n\n__**Reason:**__ Unboosting our partnered Server.\nIf you think this is a mistake then please reach out [Support Server](https://discord.gg/arsh).",
+            description=f"Hey {user.mention}, your global no prefix has expired!\n\n__**Reason:**__ Unboosting our partnered Server.\nIf you think this is a mistake then please reach out [Support Server](https://discord.gg/uBDnveBU3c).",
             color=0xFF0000,
         )
 

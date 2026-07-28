@@ -20,8 +20,8 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-red?style=for-the-badge"/></a>
 </p>
 <p>
-  <a href="https://discord.gg/arsh"><img src="https://img.shields.io/badge/Discord-Join_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white"/></a>
-  <a href="https://youtube.com/@Arsh"><img src="https://img.shields.io/badge/YouTube-Arsh-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>
+  <a href="https://discord.gg/uBDnveBU3c"><img src="https://img.shields.io/badge/Discord-Join_Server-5865F2?style=for-the-badge&logo=discord&logoColor=white"/></a>
+  <a href="https://youtube.com/@RBLXARSH"><img src="https://img.shields.io/badge/YouTube-Arsh-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>
   <a href="https://github.com/Arsh"><img src="https://img.shields.io/badge/GitHub-Arsh-181717?style=for-the-badge&logo=github&logoColor=white"/></a>
 </p>
 

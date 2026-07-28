@@ -20,8 +20,8 @@ BRAND_NAME = os.environ.get("brand_name", "Zike")
 NAME       = BRAND_NAME
 BotName    = BRAND_NAME
 
-server     = "https://discord.gg/arsh"
-serverLink = "https://discord.gg/arsh"
+server     = "https://discord.gg/uBDnveBU3c"
+serverLink = "https://discord.gg/uBDnveBU3c"
 ch         = "https://discord.com/channels/699587669059174461/1271825678710476911"
 
 CMD_WEBHOOK_URL = os.getenv("CMD_WEBHOOK_URL")

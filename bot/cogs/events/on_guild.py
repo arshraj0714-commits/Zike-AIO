@@ -98,7 +98,7 @@ Threads : {len(guild.threads)}
                 await guild.chunk()
 
             embed = discord.Embed(
-                description=f"{ARROWRED} Prefix For This Server is `>`\n{ARROWRED} Get Started with `>help`\n{ARROWRED} For detailed guides, FAQ & information, visit our **[Support Server](https://discord.gg/arsh)**",
+                description=f"{ARROWRED} Prefix For This Server is `>`\n{ARROWRED} Get Started with `>help`\n{ARROWRED} For detailed guides, FAQ & information, visit our **[Support Server](https://discord.gg/uBDnveBU3c)**",
                 color=0xFF0000,
             )
             embed.set_author(
@@ -113,7 +113,7 @@ Threads : {len(guild.threads)}
             support = Button(
                 label="Support",
                 style=discord.ButtonStyle.link,
-                url=f"https://discord.gg/arsh",
+                url=f"https://discord.gg/uBDnveBU3c",
             )
 
             view = View()

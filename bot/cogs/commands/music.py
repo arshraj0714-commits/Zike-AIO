@@ -372,7 +372,7 @@ class Music(commands.Cog):
             if player:
                 await player.disconnect(force=True)
                 try:
-                    support = Button(label='Support', style=discord.ButtonStyle.link, url='https://discord.gg/arsh')
+                    support = Button(label='Support', style=discord.ButtonStyle.link, url='https://discord.gg/uBDnveBU3c')
                     vote = Button(label='Vote', style=discord.ButtonStyle.link, url='https://top.gg/bot//vote')
                     view = LayoutView(timeout=None)
                     container = build_container(
@@ -421,7 +421,7 @@ class Music(commands.Cog):
                     await player.ctx.send(view=CV2("No suitable track found for autoplay."))
             else:
                 await player.disconnect()
-                support = Button(label='Support', style=discord.ButtonStyle.link, url='https://discord.gg/arsh')
+                support = Button(label='Support', style=discord.ButtonStyle.link, url='https://discord.gg/uBDnveBU3c')
                 vote = Button(label='Vote', style=discord.ButtonStyle.link, url='https://top.gg/bot//vote')
                 view = LayoutView(timeout=None)
                 container = build_container(
@@ -471,7 +471,7 @@ class Music(commands.Cog):
 
         if isinstance(tracks, wavelink.Playlist):
             await vc.queue.put_wait(tracks.tracks)
-            await ctx.send(view=CV2(f"{ZPLUS} Added playlist [{tracks.name}](https://discord.gg/arsh) with **{len(tracks.tracks)} songs** to the queue."))
+            await ctx.send(view=CV2(f"{ZPLUS} Added playlist [{tracks.name}](https://discord.gg/uBDnveBU3c) with **{len(tracks.tracks)} songs** to the queue."))
             if not vc.playing:
                 track = await vc.queue.get_wait()
                 await vc.play(track)
@@ -479,7 +479,7 @@ class Music(commands.Cog):
         else:
             track = tracks[0]
             await vc.queue.put_wait(track)
-            await ctx.send(view=CV2(f"{ZPLUS}   Added [{track.title}](https://discord.gg/arsh) to the queue."))
+            await ctx.send(view=CV2(f"{ZPLUS}   Added [{track.title}](https://discord.gg/uBDnveBU3c) to the queue."))
             if not vc.playing:
                 await vc.play(await vc.queue.get_wait())
                 await self.display_player_embed(vc, track, ctx)
@@ -508,7 +508,7 @@ class Music(commands.Cog):
 
                 track = search_results[0]
                 await vc.queue.put_wait(track)
-                await ctx.send(view=CV2(f"{ZPLUS}  Added [{track.title}](https://discord.gg/arsh) to the queue."))
+                await ctx.send(view=CV2(f"{ZPLUS}  Added [{track.title}](https://discord.gg/uBDnveBU3c) to the queue."))
                 if not vc.playing:
                     await vc.play(track)
                     await self.display_player_embed(vc, track, ctx)
@@ -539,7 +539,7 @@ class Music(commands.Cog):
                         c += 1
                         await ctx.message.add_reaction("✅")
 
-                await ctx.send(view=CV2(f"{ZPLUS} Added **{c}** of **{playlist_length}** tracks from **playlist** **[{playlist_info['name']}](https://discord.gg/arsh)** to the queue."))
+                await ctx.send(view=CV2(f"{ZPLUS} Added **{c}** of **{playlist_length}** tracks from **playlist** **[{playlist_info['name']}](https://discord.gg/uBDnveBU3c)** to the queue."))
                 await lmao.delete()
                 
                 if not vc.playing:
@@ -567,7 +567,7 @@ class Music(commands.Cog):
                     if track_results:
                         await vc.queue.put_wait(track_results[0])
 
-                await ctx.send(view=CV2(f"{ZPLUS} Added all tracks from album **[{album_info['name']}](https://discord.gg/arsh)** to the queue."))
+                await ctx.send(view=CV2(f"{ZPLUS} Added all tracks from album **[{album_info['name']}](https://discord.gg/uBDnveBU3c)** to the queue."))
                 if not vc.playing:
                     next_track = await vc.queue.get_wait()
                     await vc.play(next_track)

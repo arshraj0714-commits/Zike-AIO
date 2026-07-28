@@ -86,7 +86,7 @@ class MentionSelectView(LayoutView):
         elif selected == "Links":
             content = (
                 f"**[Invite {BotName}](https://discord.com/oauth2/authorize?client_id=1396114795102470196)**\n"
-                "**[Join Support Server](https://discord.gg/arsh)**"
+                "**[Join Support Server](https://discord.gg/uBDnveBU3c)**"
             )
 
         new_container = Container(

@@ -126,8 +126,8 @@ class HelpCommand(commands.HelpCommand):
               f" {ZUNMUTE} `»` Voice\n"
               f" {SEED} `»` Welcomer\n"  
               f" {ZTADA} `»` Giveaway\n"
-              f" {TICKET} `»` Ticket {NEW}\n"
-              f" {ZPEOPLE} `»` Invite Tracker {NEW}\n"
+              f" {TICKET} `»` Ticket\n"
+              f" {ZPEOPLE} `»` Invite Tracker\n"
     )
     
     embed.add_field(
@@ -135,22 +135,22 @@ class HelpCommand(commands.HelpCommand):
         value=f">>> \n {CAST} `»` Advance Logging\n"
               f" {STAR} `»` Vanityroles\n"
               
-              f" {ZCOUNTING} `»` Counting {NEW}\n"
-              f" {SYSTEM} `»` J2C {NEW}\n"
-              f" {ZAI} `»` AI {NEW}\n"
-              f" {BOOST} `»` Boost {NEW}\n"
-              f" {LEVEL_UP} `»` Leveling {NEW}\n"
-              f" {PIN} `»` Sticky {NEW}\n"
-              f" {THUNDER} `»` Verification {NEW}\n"
-              f" {LOCK} `»` Encryption {NEW}\n" 
-              f" {MINECRAFT} `»` Minecraft {NEW}\n"
-              f" {MESSAGE} `»` Joindm {NEW}\n"
-              f" {ZCIRCLE} `»` Birthday {NEW}\n"
+              f" {ZCOUNTING} `»` Counting\n"
+              f" {SYSTEM} `»` J2C\n"
+              f" {ZAI} `»` AI\n"
+              f" {BOOST} `»` Boost\n"
+              f" {LEVEL_UP} `»` Leveling\n"
+              f" {PIN} `»` Sticky\n"
+              f" {THUNDER} `»` Verification\n"
+              f" {LOCK} `»` Encryption\n" 
+              f" {MINECRAFT} `»` Minecraft\n"
+              f" {MESSAGE} `»` Joindm\n"
+              f" {ZCIRCLE} `»` Birthday\n"
               f" {ZCIRCLE_ALT1} `»` Customrole\n"           
     )
 
     embed.set_footer(
-      text=f"Requested By {self.context.author} | [Support](https://discord.gg/arsh)",
+      text=f"Requested By {self.context.author} | [Support](https://discord.gg/uBDnveBU3c)",
     )
     
     view = vhelp.View(mapping=mapping, ctx=self.context, homeembed=embed, ui=2)

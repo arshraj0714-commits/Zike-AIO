@@ -32,7 +32,7 @@ class MessagesView(LayoutView):
                     f"**Daily Messages**: {daily_average}\n"
                     f"**Today Messages**: {today_count}\n"
                     f"**Total Messages**: {total}\n\n"
-                    f"**{ARROWRED}Upgrade Your Experience With [{BRAND_NAME} Noprefix](https://discord.gg/arsh)**"
+                    f"**{ARROWRED}Upgrade Your Experience With [{BRAND_NAME} Noprefix](https://discord.gg/uBDnveBU3c)**"
                 ),
             )
         )

@@ -40,12 +40,18 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
 # --- Copy the rest of the bot source ------------------------
 COPY bot /app/bot
 
+# --- Copy start.sh from repo root INTO /app/bot -------------
+#  Must come AFTER the bot source so it isn't shadowed.
+#  The Dockerfile WORKDIR is /app/bot, so `bash start.sh`
+#  in CMD will resolve to /app/bot/start.sh.
+COPY start.sh /app/bot/start.sh
+RUN chmod +x /app/bot/start.sh
+
 # --- Environment defaults -----------------------------------
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     API_ENABLED=true \
     API_PORT=8080
 
-# --- Railway injects $PORT; map it to API_PORT --------------
-#  start.sh handles the PORT -> API_PORT mapping.
+# --- Railway injects $PORT; start.sh maps PORT -> API_PORT --
 CMD ["bash", "start.sh"]
